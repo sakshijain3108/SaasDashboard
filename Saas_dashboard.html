@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SaaS Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: #e9ebf0;
+      }
+
+      .sidebar {
+        border-right: 1px solid #dee2e6;
+        height: 120vh;
+        overflow-y: auto;
+      }
+
+      .sidebar-heading {
+        margin: 10px;
+        padding-top: 15px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .sidebar-square {
+        width: 25px;
+        height: 25px;
+        background-color: #007bff;
+        border-radius: 7px;
+        margin-right: 5px;
+      }
+
+      .menu-open {
+        width: 20px;
+        height: 13px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+        font-weight: 600;
+        color: #7a8699;
+      }
+
+      .icon {
+        width: 17px;
+        height: 17px;
+        margin-right: 20px;
+      }
+
+      .nav-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .badge {
+        margin-left: auto;
+      }
+
+      .badge-light-primary {
+        background-color: #c7e3f6;
+        color: #2178d5;
+      }
+
+      .badge-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .main-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        padding: 2px;
+        border: 2px solid #d7dce7;
+      }
+
+      .avatar-wrapper {
+        position: relative;
+      }
+
+      .green-dot {
+        width: 15px;
+        height: 15px;
+        background-color: rgb(62, 169, 62);
+        border-radius: 50%;
+        position: absolute;
+        bottom: 5px;
+        right: 0;
+        border: 4px solid white;
+      }
+
+      .arrow {
+        width: 12px;
+        height: 20px;
+      }
+
+      .input-group {
+        width: 270px;
+      }
+
+      /* Adjusting icon size */
+      .input-group-text img {
+        width: 17px;
+        height: 17px;
+      }
+
+      /* Adding padding to the right side of the right icon */
+      .input-group-text:last-child {
+        padding-right: 10px;
+      }
+
+      .circular-avatar {
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 3px solid white;
+        margin-right: -15px;
+      }
+
+      .navbar3-icon {
+        margin-right: 10px;
+      }
+      .custom-badge {
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        color: #9f950c;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 50%;
+        background-color: #e4dfc5; /* Bootstrap's badge-danger color */
+      }
+      .card {
+        height: 215px; /* Adjust height as needed */
+        width: 100%; /* Ensure card fills its column */
+        border-radius: 5px;
+        padding: 7px;
+      }
+      .card-header {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .text {
+        flex: 1;
+      }
+      .card-icon {
+        margin-right: 10px;
+        width: 13px;
+        height: 15px;
+      }
+      .number-text {
+        color: rgb(111, 187, 250);
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+
+      .left-text {
+        flex: 1;
+        font-size: 10px;
+      }
+
+      .right-text {
+        font-size: 10px;
+      }
+
+      .progress-bar-container {
+        width: 100%;
+        height: 5px; /* Adjust height as needed */
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        width: 50%; /* Adjust width as needed */
+        height: 100%;
+        background-color: #007bff; /* Progress bar color */
+      }
+
+      .badge1 {
+        display: inline-block;
+        padding: 3px 7px;
+        background-color: #d0e4fa;
+        color: #4254f7;
+        border-radius: 20px;
+        margin-top: 10px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .badge2 {
+        display: inline-block;
+        padding: 3px 7px;
+        background-color: #efeacf;
+        color: #aca10e;
+        border-radius: 20px;
+        margin-top: 10px;
+        font-size: 10px;
+        font-weight: 600;
+      }
+      .card-footer {
+        background-color: white;
+        border-top: none;
+      }
+      .footer-icon {
+        height: 15px;
+        width: 15px;
+      }
+      .footer-text1 {
+        font-size: 10px;
+        font-weight: 600;
+        color: #ab21d5;
+      }
+      .footer-text2 {
+        font-size: 10px;
+        font-weight: 600;
+        color: #d5b121;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-2 bg-white sidebar">
+          <div class="col-auto d-flex align-items-center sidebar-heading">
+            <div class="sidebar-square"></div>
+            <h2 class="pt-2" style="font-size: 15px; font-weight: 600">
+              SaaS Dashboard
+            </h2>
+            <div class="ms-auto">
+              <img src="assets/menuopen.png" alt="Icon" class="menu-open" />
+            </div>
+          </div>
+
+          <div class="col-auto d-flex align-items-center sidebar-heading">
+            <div class="avatar-wrapper position-relative">
+              <img
+                src="assets/avatar-zj1.png"
+                alt="Avatar"
+                class="main-avatar"
+              />
+              <div class="green-dot"></div>
+            </div>
+            <div class="ms-2">
+              <h2 class="pt-2 mb-0" style="font-size: 13px; font-weight: 600">
+                Design Launch
+              </h2>
+              <h2
+                class="pt-1 mb-0"
+                style="
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: rgb(187, 185, 185);
+                "
+              >
+                Designer
+              </h2>
+            </div>
+            <div class="ms-auto">
+              <img src="assets/unfoldmore.png" alt="Icon" class="arrow" />
+            </div>
+          </div>
+
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active d-flex align-items-center" href="#">
+                <img src="assets/inbox.png" alt="Icon" class="icon" />
+                Inbox
+                <div class="badge-container">
+                  <div
+                    class="badge badge-light-primary rounded-pill"
+                    style="margin-left: 90px"
+                  >
+                    4
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img
+                  src="assets/drivefolderupload.png"
+                  alt="Icon"
+                  class="icon"
+                />
+                Drive Files
+                <div
+                  class="badge badge-light-primary rounded-pill"
+                  style="margin-left: 40px"
+                >
+                  435
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img
+                  src="assets/dashboardcustomize.png"
+                  alt="Icon"
+                  class="icon"
+                />
+                Board
+                <div
+                  class="badge badge-light-primary rounded-pill"
+                  style="margin-left: 90px"
+                >
+                  5
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/accesstime.png" alt="Icon" class="icon" />
+                Updates
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/datausage.png" alt="Icon" class="icon" />
+                Analytics
+                <div
+                  class="badge badge-light-primary rounded-pill"
+                  style="margin-left: 65px"
+                >
+                  2
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/spacedashboard.png" alt="Icon" class="icon" />
+                CRM Dashboard
+                <div
+                  class="badge badge-light-primary rounded-pill"
+                  style="margin-left: 15px"
+                >
+                  2
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/sell.png" alt="Icon" class="icon" />
+                Ecommerce
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/payment.png" alt="Icon" class="icon" />
+                Cryptocurrency
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/lockclock.png" alt="Icon" class="icon" />
+                Projects
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/imagesearch.png" alt="Icon" class="icon" />
+                NFT Marketplace
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center" href="#">
+                <img src="assets/tune.png" alt="Icon" class="icon" />
+                Settings
+                <div
+                  class="badge badge-light-primary rounded-pill"
+                  style="margin-left: 75px"
+                >
+                  2
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Main content -->
+        <div class="col">
+          <div
+            class="d-flex align-items-center"
+            style="
+              margin: 10px;
+              margin-top: 15px;
+              border-bottom: 1px solid rgb(220, 216, 216);
+            "
+          >
+            <div class="input-group mb-3">
+              <span
+                class="input-group-text bg-white"
+                style="border-color: transparent"
+              >
+                <img
+                  src="assets/icon-4hm.png"
+                  alt="Search"
+                  width="20"
+                  height="20"
+                />
+              </span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search tasks"
+                style="border-color: transparent; height: 40px"
+              />
+              <span
+                class="input-group-text bg-white"
+                style="border-color: transparent"
+              >
+                <img
+                  src="assets/icon-91h.png"
+                  alt="Another Icon"
+                  width="15"
+                  height="15"
+                />
+              </span>
+            </div>
+            <img
+              src="assets/keyboardvoice.png"
+              alt="Image"
+              style="
+                margin-left: 30px;
+                margin-bottom: 15px;
+                height: 23px;
+                width: 17px;
+              "
+            />
+            <nav class="navbar navbar-expand" style="margin-left: 50px">
+              <div class="container-fluid" style="margin-left: 50px">
+                <ul class="navbar-nav">
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a
+                      class="nav-link-active"
+                      href="#"
+                      style="
+                        text-decoration: none;
+                        color: black;
+                        font-size: 14px;
+                        font-weight: 600;
+                      "
+                      >Dashboard</a
+                    >
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">My Tasks</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Reporting</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Portfolio</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Goals</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+            <div class="ms-auto me-3">
+              <img
+                src="assets/folderopen.png"
+                alt="Image 1"
+                style="height: 18px; width: 23px; margin-right: 10px"
+              />
+              <img
+                src="assets/notificationsnone.png"
+                alt="Image 2"
+                style="height: 20px; width: 17px; margin-left: 10px"
+              />
+            </div>
+          </div>
+
+          <div
+            class="d-flex align-items-center"
+            style="
+              margin: 10px;
+              margin-top: 15px;
+              border-bottom: 1px solid rgb(220, 216, 216);
+            "
+          >
+            <div class="mb-3">
+              <h4 style="font-weight: 600; margin-left: 10px">Task Boards</h4>
+            </div>
+            <img
+              src="assets/edit.png"
+              alt="Image"
+              style="
+                margin-left: 30px;
+                margin-bottom: 25px;
+                height: 15px;
+                width: 15px;
+              "
+            />
+            <nav class="navbar navbar-expand" style="margin-left: 50px">
+              <div class="container-fluid" style="margin-left: 50px">
+                <ul class="navbar-nav">
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a
+                      class="nav-link-active"
+                      href="#"
+                      style="
+                        text-decoration: none;
+                        border-bottom: 2px solid blue;
+                        color: blue;
+                        font-size: 14px;
+                        font-weight: 600;
+                      "
+                      >Timeline</a
+                    >
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Calender</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Dashboard</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Progress</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="#">Forms</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+            <div class="ms-auto me-3">
+              <img
+                src="assets/avatar-2F9.png"
+                alt="Image 1"
+                class="circular-avatar"
+              />
+              <img
+                src="assets/avatar-7Zh.png"
+                alt="Image 2"
+                class="circular-avatar"
+              />
+              <img
+                src="assets/avatar-5VH.png"
+                alt="Image 3"
+                class="circular-avatar"
+              />
+              <img
+                src="assets/avatar-h9h.png"
+                alt="Image 3"
+                class="circular-avatar"
+              />
+              <h5
+                style="
+                  display: inline-block;
+                  margin-right: -15px;
+                  margin-bottom: 0;
+                  padding-top: 10px;
+                  padding-left: 7px;
+                  padding-right: 4px;
+                  background-color: #e9ebf0;
+                  border-radius: 50%;
+                  font-size: 16px;
+                  color: black;
+                  height: 40px;
+                "
+              >
+                +5
+              </h5>
+            </div>
+            <img
+              src="assets/add-button.png"
+              alt="Image 3"
+              style="
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                margin-left: 10px;
+                border: 2px dotted #bac1cd;
+              "
+            />
+          </div>
+
+          <div
+            class="d-flex align-items-center"
+            style="margin: 10px; margin-top: 15px; margin-bottom: 20px"
+          >
+            <div
+              class="box p-2"
+              style="border-radius: 5px; background-color: #fafbfc"
+            >
+              <img
+                src="assets/icon-7P5.png"
+                alt="Icon"
+                width="20"
+                height="20"
+                class="mr-2"
+              />
+              <span
+                style="
+                  color: #6d7684;
+                  font-size: 13px;
+                  padding-left: 5px;
+                  font-weight: 600;
+                "
+                >Boards View</span
+              >
+            </div>
+            <div class="box bg-white p-2" style="border-radius: 5px">
+              <img
+                src="assets/icon.png"
+                alt="Icon"
+                width="20"
+                height="17"
+                class="mr-2"
+              />
+              <span
+                style="
+                  color: #6d7684;
+                  font-size: 13px;
+                  padding-left: 5px;
+                  font-weight: 600;
+                "
+                >List View</span
+              >
+            </div>
+
+            <img
+              src="assets/lock.png"
+              alt="Image"
+              style="
+                margin-left: 30px;
+
+                height: 19px;
+                width: 17px;
+              "
+            />
+            <span
+              style="
+                color: #6d7684;
+                font-size: 13px;
+                padding-left: 15px;
+                font-weight: 600;
+              "
+              >Limited Access</span
+            >
+            <img
+              src="assets/keyboardarrowdown.png"
+              alt="Image"
+              style="margin-left: 10px; height: 7px; width: 17px"
+            />
+            <span
+              style="
+                color: #6d7684;
+                font-size: 13px;
+                padding-left: 15px;
+                font-weight: 600;
+              "
+              >Owners</span
+            >
+            <span
+              style="
+                margin-left: 10px;
+                color: #6d7684;
+                font-size: 13px;
+                font-weight: 600;
+                padding-left: 5px;
+                padding-right: 5px;
+                background-color: white;
+                border-radius: 50%;
+              "
+              >x</span
+            >
+            <span
+              style="
+                color: #6d7684;
+                font-size: 13px;
+                padding-left: 15px;
+                font-weight: 600;
+                margin-right: 20px;
+              "
+              >X Teams</span
+            >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                background-color: white;
+                margin-left: 20px;
+                border-radius: 5px;
+              "
+            >
+              <img
+                src="assets/icon-4hm.png"
+                alt="Search"
+                width="20"
+                height="20"
+                style="margin-left: 8px"
+              />
+              <input
+                type="text"
+                placeholder="Search tasks"
+                style="
+                  border-color: transparent;
+                  height: 40px;
+                  width: 150px;
+                  border-radius: 5px;
+                "
+              />
+            </div>
+
+            <div class="ms-auto me-3">
+              <img
+                src="assets/icon-button-jgs.png"
+                alt="Image 1"
+                height="40"
+                width="40"
+                class="navbar3-icon"
+              />
+              <img
+                src="assets/icon-button-1fM.png"
+                alt="Image 2"
+                height="40"
+                width="40"
+                class="navbar3-icon"
+              />
+              <img
+                src="assets/icon-button.png"
+                alt="Image 3"
+                height="40"
+                width="40"
+                class="navbar3-icon"
+              />
+              <img
+                src="assets/icon-button-Uzs.png"
+                alt="Image 4"
+                height="40"
+                width="40"
+                class="navbar3-icon"
+              />
+              <img
+                src="assets/icon-button-Bfm.png"
+                alt="Image 5"
+                height="40"
+                width="40"
+                class="navbar3-icon"
+              />
+            </div>
+          </div>
+          <div style="margin: 10px; margin-bottom: 20px">
+            <h5 style="display: inline-block; margin-right: 10px">
+              Backlog Tasks
+            </h5>
+            <span class="custom-badge">5</span>
+          </div>
+
+          <div class="container">
+            <div class="row" style="margin-bottom: 20px">
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Page "Order" and "Setting"</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      <img
+                        src="assets/avatar-7Zh.png"
+                        alt="Image 2"
+                        class="circular-avatar"
+                      />
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Create calendar,chat and email app pages</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      <img
+                        src="assets/avatar-7Zh.png"
+                        alt="Image 2"
+                        class="circular-avatar"
+                      />
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Product Design, Figma, Sketch 
+                      (Software), Prototype</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                     
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Change email option process</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      <img
+                        src="assets/avatar-7Zh.png"
+                        alt="Image 2"
+                        class="circular-avatar"
+                      />
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Page "Order" and "Setting"</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      <img
+                        src="assets/avatar-7Zh.png"
+                        alt="Image 2"
+                        class="circular-avatar"
+                      />
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Create calendar, chat and 
+                      email app pages</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      <img
+                        src="assets/avatar-7Zh.png"
+                        alt="Image 2"
+                        class="circular-avatar"
+                      />
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Product Design, Figma, Sketch 
+                      (Software), Prototype</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-header">
+                    <span class="text">Change email option process</span>
+                    <img
+                      src="assets/task-ggP.png"
+                      alt="Icon"
+                      class="card-icon"
+                    />
+                    <span class="number-text">4</span>
+                  </div>
+                  <div class="card-body">
+                    <div class="content">
+                      <span class="left-text">Progress</span>
+                      <span class="right-text">8/10</span>
+                    </div>
+                    <div class="progress-bar-container">
+                      <div class="progress-bar"></div>
+                    </div>
+                    <div class="badge1">Design</div>
+                    <div class="badge2">Backlog</div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="ms-auto me-3">
+                      <img
+                        src="assets/avatar-2F9.png"
+                        alt="Image 1"
+                        class="circular-avatar"
+                      />
+                      <img
+                        src="assets/avatar-7Zh.png"
+                        alt="Image 2"
+                        class="circular-avatar"
+                      />
+
+                      <h5
+                        style="
+                          display: inline-block;
+                          margin-right: -15px;
+                          padding-top: 7px;
+                          padding-left: 7px;
+                          padding-right: 4px;
+                          background-color: #e9ebf0;
+                          border-radius: 50%;
+                          font-size: 16px;
+                          color: black;
+                          height: 35px;
+                          width: 35px;
+                        "
+                      >
+                        +5
+                      </h5>
+                      <img
+                        src="assets/add-button.png"
+                        alt="Image 3"
+                        style="
+                          height: 35px;
+                          width: 35px;
+                          border-radius: 50%;
+                          margin-left: 23px;
+                          border: 2px dotted #bac1cd;
+                          margin-right: 15px;
+                        "
+                      />
+                      <img
+                        src="assets/filepresent-e7r.png"
+                        alt="Icon 1"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text1">4</span>
+                      <img
+                        src="assets/message-jCK.png"
+                        alt="Icon 2"
+                        class="footer-icon"
+                      />
+                      <span class="footer-text2">4</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- /Main content -->
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
